@@ -1,15 +1,11 @@
 const express =require('express')
-
+const {loginUser,registerUser}=require('../controller/UserController')
 const router=express.Router()
 
 
-router.post('/',(req,res)=>{
-    res.send(`Resgister Route`)
-})
+router.post('/',registerUser)
 
 
-router.post('/login', (req, res) => {
-  res.send(`Login  Route`);
-});
+router.post('/login', loginUser)
 
 module.exports =router
