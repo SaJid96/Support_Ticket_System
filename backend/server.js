@@ -1,5 +1,6 @@
 const express =require('express')
-const PORT=5000
+const dotenv=require('dotenv').config()
+const PORT=process.env.PORT || 8000
 const app=express()
 
 app.listen(PORT,()=>{
