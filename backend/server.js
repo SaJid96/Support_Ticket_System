@@ -8,6 +8,8 @@ app.get('/',(req,res)=>{
     res.status(200).json(`message:welcome to support desk api`)
 })
 
+app.use('/api/users',require('./routes/UserRoutes'))
+
 app.listen(PORT,()=>{
         console.log(`sERVER STARTED ON ${PORT}`);
 })
