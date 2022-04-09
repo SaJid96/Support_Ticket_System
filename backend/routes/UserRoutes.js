@@ -1,5 +1,7 @@
 const express =require('express')
-const {loginUser,registerUser}=require('../controller/UserController')
+const {loginUser,registerUser,getMe}=require('../controller/UserController')
+const { protect } = require('../middleware/authMiddleware');
+
 const router=express.Router()
 
 
@@ -7,5 +9,7 @@ router.post('/',registerUser)
 
 
 router.post('/login', loginUser)
+router.get('/me', protect, getMe);
+
 
 module.exports =router
