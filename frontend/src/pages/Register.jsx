@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { FaUser } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+
+
 const Register = () => {
   const [formData, setFormData] = useState({
     name: '',
