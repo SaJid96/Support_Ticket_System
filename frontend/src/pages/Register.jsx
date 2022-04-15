@@ -1,23 +1,31 @@
-import React,{useState} from 'react';
-import {FaUser} from 'react-icons/fa'
+import React, { useState } from 'react';
+import { FaUser } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 const Register = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password1: '',
+    password2: '',
+  });
 
-  const [formData,setFormData]=useState({
-    name:'',
-    email:'',
-    password1:'',
-    password2:''
-  })
+  const { name, email, password1, password2 } = formData;
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
 
 
-  const {name,email,password1,password2}=formData
-const onChange=(e)=>{
-  setFormData((prevState)=>({
+  const onSubmit=(e)=>{
 
-    ...prevState,
-    [e.target.name]:e.target.value
-  }))
-}
+    e.preventDefault()
+    if (password1 !== password2) {
+      
+      toast.error('Password does Not match')
+    }
+  }
   return (
     <>
       <section className="heading">
@@ -38,6 +46,7 @@ const onChange=(e)=>{
             name="name"
             onChange={onChange}
             placeholder="Enter your Name"
+            required
           />
         </div>
         <div className="form-group">
@@ -49,6 +58,7 @@ const onChange=(e)=>{
             name="email"
             onChange={onChange}
             placeholder="Enter your Email"
+            required
           />
         </div>
         <div className="form-group">
@@ -60,6 +70,7 @@ const onChange=(e)=>{
             name="password1"
             onChange={onChange}
             placeholder="Enter your Password"
+            required
           />
         </div>
         <div className="form-group">
@@ -71,6 +82,7 @@ const onChange=(e)=>{
             name="password2"
             onChange={onChange}
             placeholder="Confirm your Password"
+            required
           />
         </div>
         <div className="form-group">
