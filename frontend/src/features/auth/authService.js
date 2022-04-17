@@ -15,12 +15,11 @@ const register = async (userData) => {
 };
 
 
-const logout=localStorage.removeItem('user')
-
+const logout = () => localStorage.removeItem('user')
 
 const authService = {
   register,
-  logout
+  logout,
 };
 
 export default authService;
