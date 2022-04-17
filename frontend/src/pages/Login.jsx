@@ -54,6 +54,11 @@ const Login = () => {
     dispatch(login(userData))
    
   };
+
+
+  if (isLoading) {
+    return <Spinner />;
+  }
   return (
     <>
       <section className="heading">
