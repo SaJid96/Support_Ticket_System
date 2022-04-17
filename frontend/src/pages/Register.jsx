@@ -4,6 +4,10 @@ import { FaUser } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { register,reset } from '../features/auth/authSlice';
 import {useSelector,useDispatch} from 'react-redux'
+import Spinner from '../components/Spinner';
+
+
+
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -57,6 +61,10 @@ const navigate = useNavigate()
       dispatch(register(userData))
     }
   }
+
+if (isLoading) {
+  return <Spinner/>
+}
   return (
     <>
       <section className="heading">
