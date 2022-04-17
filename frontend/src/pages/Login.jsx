@@ -1,7 +1,6 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { FaSignInAlt } from 'react-icons/fa';
 import { toast } from 'react-toastify';
-import { login } from '../features/auth/authSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { login, reset } from '../features/auth/authSlice';
 import Spinner from '../components/Spinner';
