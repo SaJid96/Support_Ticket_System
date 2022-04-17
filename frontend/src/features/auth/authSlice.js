@@ -28,6 +28,11 @@ try {
 export const login=createAsyncThunk('auth/register',async(user,thunkAPI)=>{
 console.log(user);
 })
+
+export const logout=createAsyncThunk('auth/logout',async()=>{
+    await authService.logout()
+})
+
 export const authSlice=createSlice({
     name:'auth',
     initialState,
