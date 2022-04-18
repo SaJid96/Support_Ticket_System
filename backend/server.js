@@ -21,6 +21,7 @@ app.get('/',(req,res)=>{
 
 //Routes
 app.use('/api/users',require('./routes/UserRoutes'))
+app.use('/api/tickets', require('./routes/ticketRoutes'));
 app.use(erroHandler)
 
 app.listen(PORT,()=>{
