@@ -8,12 +8,19 @@ const Ticket = require('../models/ticketModel');
 // @route   GET /api/tickets
 // @access  Private
 
-const getTicket=asyncHandler(async(req,res)=>{
+const getTickets = asyncHandler(async (req, res) => {
+  // Get user using the id in the JWT
+  const user = await User.findById(req.user.id);
 
-    res.status(200).json({message:"get Ticket!"})
+  if (!user) {
+    res.status(401);
+    throw new Error('User not found');
+  }
 
-})
+  const tickets = await Ticket.find({ user: req.user.id });
 
+  res.status(200).json(tickets);
+});
 
 // @desc    Create new ticket
 // @route   POST /api/tickets
@@ -24,6 +31,6 @@ const createTicket = asyncHandler(async (req, res) => {
 });
 
 module.exports={
-    getTicket,
+    getTickets,
     createTicket
 }
