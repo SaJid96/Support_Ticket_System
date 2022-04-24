@@ -1,16 +1,43 @@
-import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { createTicket, reset } from '../features/ticket/ticketSlice';
+import Spinner from '../components/Spinner';
 
 const NewTicket = () => {
   const { user } = useSelector((state) => state.auth);
+  const { ticket, isLoading, isSuccess, isError, message } = useSelector(
+    (state) => state.tickets
+  );
 
   const [name] = useState(user.name);
   const [email] = useState(user.email);
   const [product, setProduct] = useState('iPhone');
   const [description, setDescription] = useState('');
 
-  const onSubmit=(e)=>{
-    e.preventDefault()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+    if (isSuccess) {
+      dispatch(reset());
+      navigate('/tickets');
+    }
+  }, [dispatch,isError,isSuccess,navigate,message]);
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(createTicket(product, description));
+  };
+
+
+  if (isLoading) {
+    return <Spinner/>
   }
 
   return (
@@ -20,7 +47,10 @@ const NewTicket = () => {
         <p>Please fill out the form below</p>
       </section>
 
-      <section className="form mb-5" style={{ marginBottom: '5rem !important' }}>
+      <section
+        className="form mb-5"
+        style={{ marginBottom: '5rem !important' }}
+      >
         <div className="form-group">
           <label htmlFor="name">Customer Name</label>
           <input type="text" value={name} disabled className="form-control" />
