@@ -20,7 +20,7 @@ const NewTicket = () => {
         <p>Please fill out the form below</p>
       </section>
 
-      <section className="form">
+      <section className="form mb-5" style={{ marginBottom: '5rem !important' }}>
         <div className="form-group">
           <label htmlFor="name">Customer Name</label>
           <input type="text" value={name} disabled className="form-control" />
@@ -29,7 +29,37 @@ const NewTicket = () => {
           <label htmlFor="name">Customer Email</label>
           <input type="text" value={email} disabled className="form-control" />
         </div>
-       
+        <form onSubmit={onSubmit}>
+          <div className="form-group">
+            <label htmlFor="product">Product</label>
+            <select
+              name="product"
+              id="product"
+              value={product}
+              onChange={(e) => setProduct(e.target.value)}
+            >
+              <option value="iPhone">iPhone</option>
+              <option value="Macbook Pro">Macbook Pro</option>
+              <option value="iMac">iMac</option>
+              <option value="iPad">iPad</option>
+            </select>
+          </div>
+          <div className="form-group">
+            <label htmlFor="description">Description of the issue</label>
+            <textarea
+              name="description"
+              id="description"
+              className="form-control"
+              placeholder="Description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            ></textarea>
+          </div>
+
+          <div className="form-group mb-5">
+            <button className="btn btn-block">Submit</button>
+          </div>
+        </form>
       </section>
     </>
   );
