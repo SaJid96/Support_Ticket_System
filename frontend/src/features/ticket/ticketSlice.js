@@ -13,7 +13,6 @@ const initialState = {
 
 
 //create New Ticket
-
 export const createTicket = createAsyncThunk(
   'tickets/create',
   async (ticketData, thunkAPI) => {
