@@ -27,18 +27,18 @@ const NewTicket = () => {
       dispatch(reset());
       navigate('/tickets');
     }
-  }, [dispatch,isError,isSuccess,navigate,message]);
+  }, [dispatch, isError, isSuccess, navigate, message]);
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+   const onSubmit = (e) => {
+     e.preventDefault();
+     console.log(product);
+     dispatch(createTicket({ product, description }));
+   };
 
-    dispatch(createTicket(product, description));
-  };
+   if (isLoading) {
+     return <Spinner />;
+   }
 
-
-  if (isLoading) {
-    return <Spinner/>
-  }
 
   return (
     <>
@@ -47,17 +47,14 @@ const NewTicket = () => {
         <p>Please fill out the form below</p>
       </section>
 
-      <section
-        className="form mb-5"
-        style={{ marginBottom: '5rem !important' }}
-      >
+      <section className="form">
         <div className="form-group">
           <label htmlFor="name">Customer Name</label>
-          <input type="text" value={name} disabled className="form-control" />
+          <input type="text" className="form-control" value={name} disabled />
         </div>
         <div className="form-group">
-          <label htmlFor="name">Customer Email</label>
-          <input type="text" value={email} disabled className="form-control" />
+          <label htmlFor="email">Customer Email</label>
+          <input type="text" className="form-control" value={email} disabled />
         </div>
         <form onSubmit={onSubmit}>
           <div className="form-group">
@@ -85,8 +82,7 @@ const NewTicket = () => {
               onChange={(e) => setDescription(e.target.value)}
             ></textarea>
           </div>
-
-          <div className="form-group mb-5">
+          <div className="form-group">
             <button className="btn btn-block">Submit</button>
           </div>
         </form>

@@ -4,7 +4,7 @@ const User = require('../models/userModel');
 const Ticket = require('../models/ticketModel');
 
 
-// @desc    Get user tickets
+// @desc    Get user tickets 
 // @route   GET /api/tickets
 // @access  Private
 
@@ -52,7 +52,7 @@ const getTicket = asyncHandler(async (req, res) => {
 
 // @desc    Create new ticket
 // @route   POST /api/tickets
-// @access  Private
+// @access  Private product
 
 const createTicket = asyncHandler(async (req, res) => {
    const { product, description } = req.body;
