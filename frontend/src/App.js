@@ -7,8 +7,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Header from './components/Header';
 import PrivateRoute from './components/PrivateRoute';
-
 import NewTicket from './pages/NewTicket';
+import Tickets from './pages/Tickets';
 
 
 function App() {
@@ -21,8 +21,11 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path='/new-ticket' element={<PrivateRoute/>}>
+            <Route path="/new-ticket" element={<PrivateRoute />}>
               <Route path="/new-ticket" element={<NewTicket />} />
+            </Route>
+            <Route path="/tickets" element={<PrivateRoute />}>
+              <Route path="/tickets" element={<Tickets />} />
             </Route>
           </Routes>
         </div>
