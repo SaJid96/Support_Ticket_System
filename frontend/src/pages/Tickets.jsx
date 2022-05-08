@@ -24,6 +24,7 @@ function Tickets() {
     dispatch(getTickets());
   }, [dispatch]);
 
+
   if (isLoading) {
     return <Spinner />;
   }

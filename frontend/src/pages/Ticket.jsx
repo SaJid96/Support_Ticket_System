@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { getTicket } from '../features/ticket/ticketSlice';
+import { getTicket,closeTicket } from '../features/ticket/ticketSlice';
 import BackButton from '../components/Backbutton';
 import Spinner from '../components/Spinner';
 import { useEffect, useState } from 'react';
@@ -7,24 +7,29 @@ import { toast } from 'react-toastify';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const Ticket = () => {
+  const { ticket, isLoading, isSuccess, isError, message } = useSelector(
+    (state) => state.tickets
+  );
 
+  const params = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { ticketId } = useParams();
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
 
-   const { ticket, isLoading, isSuccess, isError, message } = useSelector(
-     (state) => state.tickets
-   );
+    dispatch(getTicket(ticketId));
+    // eslint-disable-next-line
+  }, [isError, message, ticketId]);
 
-   const params = useParams();
-   const navigate = useNavigate();
-   const dispatch = useDispatch();
-    const {ticketId}=useParams()
-   useEffect(()=>{
-     if (isError) {
-       toast.error(message);
-     }
-
-     dispatch(getTicket(ticketId));
-     // eslint-disable-next-line
-   },[isError,message,ticketId])
+  // Close ticket
+  const onTicketClose = () => {
+    dispatch(closeTicket(ticketId));
+    toast.success('Ticket Closed');
+    navigate('/tickets');
+  };
 
 
   if (isLoading) {
@@ -56,10 +61,12 @@ const Ticket = () => {
           </div>
         </header>
 
-         
-        
-
-      
+        {ticket.status !== 'closed' && (
+          <button
+          onClick={onTicketClose}
+          className='btn btn-block btn-danger'
+          >Close Tcket</button>
+        )}
       </div>
     </>
   );
