@@ -2,8 +2,9 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getTickets, reset } from '../features/ticket/ticketSlice';
 import Spinner from '../components/Spinner';
-import Backbutton from '../components/Backbutton';
+import BackButton from '../components/Backbutton';
 import TicketItem from '../components/TicketItem';
+
 function Tickets() {
   const { tickets, isLoading, isSuccess } = useSelector(
     (state) => state.tickets
@@ -29,7 +30,7 @@ function Tickets() {
 
   return (
     <>
-      <Backbutton url="/" />
+      <BackButton url="/" />
       <h1>Tickets</h1>
       <div className="tickets">
         <div className="ticket-headings">
@@ -38,8 +39,8 @@ function Tickets() {
           <div>Status</div>
           <div></div>
         </div>
-        {tickets.map((ticket)=>(
-          <TicketItem key={ticket.id} ticket={ticket}/>
+        {tickets.map((ticket) => (
+          <TicketItem key={ticket._id} ticket={ticket} />
         ))}
       </div>
     </>
